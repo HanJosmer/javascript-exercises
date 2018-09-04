@@ -1,9 +1,15 @@
 const repeatString = function(string, times) {
     let finalString = "";
-    for (var i = 0; i < times; i++) {
-        finalString += string;
+    if (times >= 1) {
+        for (let i = 0; i < times; i++) {
+            finalString += string;
+        }
+        return finalString;
+    } else if (times < 0) {
+        return "ERROR";
+    } else {
+        return finalString
     }
-    return console.log(finalString);
 }
 
 module.exports = repeatString
