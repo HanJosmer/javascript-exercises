@@ -7,29 +7,25 @@ function translate(inputString) {
 	const words = inputString.split(" ");
 	console.log(words);
 
-	// remove first consonanants from string
-	let j = 0;
-	const first = firstConsonants(words, j);
-	
-	for (let i = 0; i < first.length; i++) {
-		words.shift();
-	}
+	// perform pig latin transform on each word
+	words.forEach(function() {
+		words.push(pigLatin(words.shift()));
+	});
 
-	console.log(words);
-
-	// determine if word begins with vowel or consonant
-	// todo
+	return words.join(" ");
 }
 
-function firstConsonants(inputString, j) {
-	const inputStringArray = inputString[j].split("");
-	const consonants = [];
-	let i = 0;
-	while (CONSONANTS.includes(inputStringArray[i])) {
-		consonants.push(inputStringArray[i]);
-		i++;
+function pigLatin(inputString) {
+	const inputStringArray = inputString.split("");
+	while (CONSONANTS.includes(inputStringArray[0])) {
+		if (inputStringArray[0] === "q" && inputStringArray[1] === "u") {
+			inputStringArray.push(...inputStringArray.splice(0, 2))
+			continue;
+		}
+		inputStringArray.push(inputStringArray.shift());
 	}
-	return consonants;
+	inputStringArray.push("ay");
+	return inputStringArray.join("");
 }
 
 
